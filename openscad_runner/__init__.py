@@ -8,6 +8,7 @@ import subprocess
 
 from enum import Enum
 from PIL import Image, ImageChops
+import pygifsicle
 
 
 class RenderMode(Enum):
@@ -259,6 +260,7 @@ class OpenScadRunner(object):
                 )
                 for imgfile in imgfiles:
                     os.unlink(imgfile)
+                pygifsicle.optimize(self.outfile)
             elif self.antialias != 1.0:
                 im = Image.open(self.outfile)
                 im.thumbnail(self.imgsize, Image.ANTIALIAS)

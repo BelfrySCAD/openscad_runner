@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 
 
 with open('README.rst') as f:
@@ -19,7 +19,7 @@ setup(
     author='Revar Desmera',
     author_email='revarbat@gmail.com',
     url='https://github.com/revarbat/openscad_runner',
-    download_url='https://github.com/revarbat/openscad_runner/archive/master.zip',
+    download_url='https://github.com/revarbat/openscad_runner/archive/v1.0.2.zip',
     packages=['openscad_runner'],
     license='MIT License',
     classifiers=[
@@ -41,7 +41,8 @@ setup(
     keywords='openscad interface',
     install_requires=[
         'setuptools',
-        'Pillow>=7.2.0'
+        'Pillow>=7.2.0',
+        'pygifsicle>=1.0.2'
     ],
     data_files=data_files,
 )
