@@ -197,7 +197,7 @@ class OpenScadRunner(object):
             if self.orthographic:
                 scadcmd.append("--projection=o" if self.orthographics else "--projection=p")
             if self.auto_center:
-                scadcmd.append("--auto_center")
+                scadcmd.append("--autocenter")
             if self.view_all:
                 scadcmd.append("--viewall")
             if self.animate is not None:
