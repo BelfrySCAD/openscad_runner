@@ -197,8 +197,7 @@ class OpenScadRunner(object):
                 scadcmd.extend(["--camera", ",".join(str(x) for x in self.camera)])
             if self.color_scheme != ColorScheme.cornfield:
                 scadcmd.extend(["--colorscheme", self.color_scheme])
-            if self.orthographic:
-                scadcmd.append("--projection=o" if self.orthographics else "--projection=p")
+            scadcmd.append("--projection=o" if self.orthographic else "--projection=p")
             if self.auto_center:
                 scadcmd.append("--autocenter")
             if self.view_all:
