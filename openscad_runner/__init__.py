@@ -260,7 +260,7 @@ class OpenScadRunner(object):
                 )
                 for imgfile in imgfiles:
                     os.unlink(imgfile)
-                pygifsicle.optimize(self.outfile)
+                pygifsicle.optimize(self.outfile, colors=64)
             elif self.antialias != 1.0:
                 im = Image.open(self.outfile)
                 im.thumbnail(self.imgsize, Image.ANTIALIAS)
