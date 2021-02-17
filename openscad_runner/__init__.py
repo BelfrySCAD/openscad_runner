@@ -79,7 +79,8 @@ class OpenScadRunner(object):
         customizer_file=None,
         customizer_params={},
         hard_warnings=False,
-        quiet=False
+        quiet=False,
+        verbose=False
     ):
         """
         Initializer method.  Arguments are:
@@ -107,6 +108,7 @@ class OpenScadRunner(object):
         - customizer_params = An optional dictionary of customizer parameter names and values to set.
         - hard_warnings = Stop at first WARNING, as if it were an ERROR.  Default: False
         - quiet = Suppresses non-error, non-warning messages.  Default: False
+        - verbose = Print the command-line to stdout on each execution.  Default: False
         """
         if platform.system() == "Darwin":
             self.OPENSCAD = "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"
@@ -136,6 +138,7 @@ class OpenScadRunner(object):
         self.customizer_params = customizer_params
         self.hard_warnings = hard_warnings
         self.quiet = quiet
+        self.verbose = verbose
 
         self.cmdline = []
         self.script = []
@@ -191,7 +194,7 @@ class OpenScadRunner(object):
             if self.camera is not None:
                 while len(self.camera) < 6:
                     self.camera.append(0)
-                scadcmd.extend(["--camera", ",".join(self.camera)])
+                scadcmd.extend(["--camera", ",".join(str(x) for x in self.camera)])
             if self.color_scheme != ColorScheme.cornfield:
                 scadcmd.extend(["--colorscheme", self.color_scheme])
             if self.orthographic:
@@ -227,6 +230,12 @@ class OpenScadRunner(object):
         if self.quiet:
             scadcmd.append("--quiet")
         scadcmd.append(self.scriptfile)
+        if self.verbose:
+            line = " ".join([
+                "'{}'".format(arg) if ' ' in arg or arg=='' else arg
+                for arg in scadcmd
+            ])
+            print(line)
         p = subprocess.Popen(scadcmd, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
         (stdoutdata, stderrdata) = p.communicate(None)
         stdoutdata = stdoutdata.decode('utf-8')
