@@ -250,7 +250,7 @@ class OpenScadRunner(object):
             os.unlink("foo.term")
         with open(self.scriptfile, "r") as f:
             self.script = f.readlines();
-        if self.success:
+        if self.success and self.render_mode != RenderMode.test_only:
             if self.animate:
                 imgs = []
                 imgfiles = ["{}{:05d}.png".format(basename,i) for i in range(self.animate)]
