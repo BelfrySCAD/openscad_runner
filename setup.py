@@ -19,7 +19,7 @@ setup(
     author='Revar Desmera',
     author_email='revarbat@gmail.com',
     url='https://github.com/revarbat/openscad_runner',
-    download_url='https://github.com/revarbat/openscad_runner/archive/v1.0.7.zip',
+    download_url='https://github.com/revarbat/openscad_runner/archive/v1.0.8.zip',
     packages=['openscad_runner'],
     license='MIT License',
     classifiers=[
