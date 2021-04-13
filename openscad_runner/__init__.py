@@ -259,6 +259,8 @@ class OpenScadRunner(object):
                     if self.antialias != 1.0:
                         img.thumbnail(self.imgsize, Image.ANTIALIAS)
                     imgs.append(img)
+                for imgfile in imgfiles:
+                    os.unlink(imgfile)
                 imgs[0].save(
                     self.outfile,
                     save_all=True,
@@ -266,12 +268,11 @@ class OpenScadRunner(object):
                     duration=self.animate_duration,
                     loop=0
                 )
-                for imgfile in imgfiles:
-                    os.unlink(imgfile)
                 pygifsicle.optimize(self.outfile, colors=64)
-            elif self.antialias != 1.0:
+            elif float(self.antialias) != 1.0:
                 im = Image.open(self.outfile)
                 im.thumbnail(self.imgsize, Image.ANTIALIAS)
+                os.unlink(self.outfile)
                 im.save(self.outfile)
         self.complete = True
         return self.success
