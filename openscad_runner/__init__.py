@@ -240,12 +240,14 @@ class OpenScadRunner(object):
         stdoutdata = stdoutdata.decode('utf-8')
         stderrdata = stderrdata.decode('utf-8')
         self.return_code = p.returncode
-        if self.return_code==0 and not self.warnings and not self.errors:
-            self.success = True
         self.cmdline = scadcmd
-        self.echos = [x for x in stderrdata.split("\n") if x.startswith("ECHO:")]
-        self.warnings = [x for x in stderrdata.split("\n") if x.startswith("WARNING:")]
-        self.errors = [x for x in stderrdata.split("\n") if x.startswith("ERROR:") or x.startswith("TRACE:")]
+        self.stderr = stderrdata.split("\n")
+        self.stdout = stdoutdata.split("\n")
+        self.echos    = [x for x in self.stderr if x.startswith("ECHO:")]
+        self.warnings = [x for x in self.stderr if x.startswith("WARNING:")]
+        self.errors   = [x for x in self.stderr if x.startswith("ERROR:") or x.startswith("TRACE:")]
+        if self.return_code==0 and self.errors==[] and (not self.hard_warnings or self.warnings==[]):
+            self.success = True
         if self.render_mode==RenderMode.test_only and os.path.isfile("foo.term"):
             os.unlink("foo.term")
         with open(self.scriptfile, "r") as f:

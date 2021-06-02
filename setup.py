@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-VERSION = "1.0.9"
+VERSION = "1.0.10"
 
 
 with open('README.rst') as f:
@@ -19,7 +19,7 @@ setup(
     author='Revar Desmera',
     author_email='revarbat@gmail.com',
     url='https://github.com/revarbat/openscad_runner',
-    download_url='https://github.com/revarbat/openscad_runner/archive/v1.0.9.zip',
+    download_url='https://github.com/revarbat/openscad_runner/archive/v{}.zip'.format(VERSION),
     packages=['openscad_runner'],
     license='MIT License',
     classifiers=[
