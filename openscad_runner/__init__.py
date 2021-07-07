@@ -235,6 +235,9 @@ class OpenScadRunner(object):
                 for arg in scadcmd
             ])
             print(line)
+        if platform.system() == "Windows":
+            # Due to argument escaping, empty arguments will cause openscad to fail on Windows
+            scadcmd = [c for c in scadcmd if c]
         p = subprocess.Popen(scadcmd, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
         (stdoutdata, stderrdata) = p.communicate(None)
         stdoutdata = stdoutdata.decode('utf-8')
