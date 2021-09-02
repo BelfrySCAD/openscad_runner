@@ -143,6 +143,8 @@ class OpenScadRunner(object):
         self.cmdline = []
         self.script = []
         self.return_code = None
+        self.stderr = []
+        self.stdout = []
         self.echos = []
         self.warnings = []
         self.errors = []
