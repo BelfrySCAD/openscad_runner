@@ -5,6 +5,7 @@ import filecmp
 import os.path
 import platform
 import subprocess
+import distutils.spawn
 
 from enum import Enum
 from PIL import Image, ImageChops
@@ -112,6 +113,20 @@ class OpenScadRunner(object):
         """
         if platform.system() == "Darwin":
             self.OPENSCAD = "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"
+        elif platform.system() == "Windows":
+            if distutils.spawn.find_executable("openscad"):
+                self.OPENSCAD = "openscad"
+            else:
+                test_paths = [
+                    "C:\\Program Files\\openSCAD\\openscad.com",
+                    "C:\\Program Files (x86)\\openSCAD\\openscad.com",
+                ]
+                for p in test_paths:
+                    if os.path.isfile(p):
+                        self.OPENSCAD = p
+                        break
+            if not hasattr(self, "OPENSCAD"):
+                raise Exception("Can't find OpenSCAD executable. Is OpenSCAD on your system PATH?")
         else:
             self.OPENSCAD = "openscad"
         self.scriptfile = scriptfile
@@ -237,6 +252,9 @@ class OpenScadRunner(object):
                 for arg in scadcmd
             ])
             print(line)
+        if platform.system() == "Windows":
+            # Due to argument escaping, empty arguments will cause openscad to fail on Windows
+            scadcmd = [c for c in scadcmd if c]
         p = subprocess.Popen(scadcmd, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
         (stdoutdata, stderrdata) = p.communicate(None)
         stdoutdata = stdoutdata.decode('utf-8')
