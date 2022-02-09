@@ -207,22 +207,13 @@ class OpenScadRunner(object):
             if self.animate is not None:
                 scadcmd.extend(["--animate", "{}".format(self.animate)])
             if self.render_mode == RenderMode.render:
-                if platform.system() == "Windows":
-                    scadcmd.extend(["--render"])
-                else:
-                    scadcmd.extend(["--render", ""])
+                scadcmd.extend(["--render", ""])
             elif self.render_mode == RenderMode.preview:
-                if platform.system() == "Windows":
-                    scadcmd.extend(["--preview"])
-                else:
-                    scadcmd.extend(["--preview", ""])
+                scadcmd.extend(["--preview", ""])
             elif self.render_mode == RenderMode.thrown_together:
                 scadcmd.extend(["--preview", "throwntogether"])
             elif self.render_mode == RenderMode.wireframe:
-                if platform.system() == "Windows":
-                    scadcmd.extend(["--render"])
-                else:
-                    scadcmd.extend(["--render", ""])
+                scadcmd.extend(["--render", ""])
             if self.csg_limit is not None:
                 scadcmd.extend(["--csglimit", self.csg_limit])
         if self.deps_file != None:
