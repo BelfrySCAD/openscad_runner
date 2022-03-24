@@ -36,8 +36,8 @@ The ``OpenScadRunner`` class provides the following methods:
     - outfile = The name of the file to output to.
     - imgsize = The size of the imagefile to output to, if outputting to a PNG or GIF.  Default: (640,480)
     - antialias = The antialiasing scaling factor.  If greater than 1.0, images are generated at a larger size, then scaled down to the target size with anti-aliasing.  Default: 1.0  (no anti-aliasing)
-    - animate = If given an integer number of frames, creates that many frames of animation, and collates them into an animated GIF.  Default: None
-    - animate_duration = Number of milliseconds per frame for an animated GIF.  Default: 250
+    - animate = If given an integer number of frames, creates that many frames of animation, and collates them into an animated GIF or APNG.  Default: None
+    - animate_duration = Number of milliseconds per frame for an animated GIF or APNG.  Default: 250
     - render_mode = The rendering mode to use when generating an image.  See RenderMode Enum.  Default: RenderMode.preview
     - show_axes = If True, show axes in the rendering.  Default: True
     - show_scales = If True, show the scales along the axes.  Default: True
@@ -73,56 +73,70 @@ Creating an STL file::
 
     from openscad_runner import OpenScadRunner
     osr = OpenScadRunner("example.scad", "example.stl")
+    osr.run()
+    for line in osr.echos:
+        print(line)
+    for line in osr.warnings:
+        print(line)
+    for line in osr.errors:
+        print(line)
     if osr.good():
-        for line in osr.echos:
-            print(line)
         print("Successfully created example.stl")
-    else:
-        for line in osr.warnings:
-            print(line)
-        for line in osr.errors:
-            print(line)
 
 Creating a Preview PNG::
 
     from openscad_runner import RenderMode, OpenScadRunner
     osr = OpenScadRunner("example.scad", "example.png", render_mode=RenderMode.preview, imgsize=(800,600), antialias=2.0)
+    osr.run()
+    for line in osr.echos:
+        print(line)
+    for line in osr.warnings:
+        print(line)
+    for line in osr.errors:
+        print(line)
     if osr.good():
-        for line in osr.echos:
-            print(line)
         print("Successfully created example.png")
-    else:
-        for line in osr.warnings:
-            print(line)
-        for line in osr.errors:
-            print(line)
 
 Creating a Fully Rendered PNG::
 
     from openscad_runner import RenderMode, OpenScadRunner
     osr = OpenScadRunner("example.scad", "example.png", render_mode=RenderMode.render, imgsize=(800,600), antialias=2.0)
+    osr.run()
+    for line in osr.echos:
+        print(line)
+    for line in osr.warnings:
+        print(line)
+    for line in osr.errors:
+        print(line)
     if osr.good():
-        for line in osr.echos:
-            print(line)
         print("Successfully created example.png")
-    else:
-        for line in osr.warnings:
-            print(line)
-        for line in osr.errors:
-            print(line)
 
 Rendering an animated GIF::
 
-    from openscad_runner import RenderMode, OpenScadRunner
+    from openscad_runner import OpenScadRunner
     osr = OpenScadRunner("example.scad", "example.gif", imgsize=(320,200), animate=36, animate_duration=200)
+    osr.run()
+    for line in osr.echos:
+        print(line)
+    for line in osr.warnings:
+        print(line)
+    for line in osr.errors:
+        print(line)
     if osr.good():
-        for line in osr.echos:
-            print(line)
         print("Successfully created example.gif")
-    else:
-        for line in osr.warnings:
-            print(line)
-        for line in osr.errors:
-            print(line)
+
+Rendering an animated PNG::
+
+    from openscad_runner import OpenScadRunner
+    osr = OpenScadRunner("example.scad", "example.png", imgsize=(320,200), animate=36, animate_duration=200)
+    osr.run()
+    for line in osr.echos:
+        print(line)
+    for line in osr.warnings:
+        print(line)
+    for line in osr.errors:
+        print(line)
+    if osr.good():
+        print("Successfully created example.png")
 
 

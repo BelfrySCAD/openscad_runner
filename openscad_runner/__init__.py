@@ -10,6 +10,7 @@ import distutils.spawn
 from enum import Enum
 from PIL import Image, ImageChops
 import pygifsicle
+from apng import APNG
 
 
 class RenderMode(Enum):
@@ -186,7 +187,7 @@ class OpenScadRunner(object):
         basename, fileext = os.path.splitext(outfile)
         fileext = fileext.lower()
         if self.animate is not None:
-            assert (fileext == ".gif"), "Can only animate to a gif file."
+            assert (fileext in (".gif", ".png")), "Can only animate to a gif or png file."
             basename = basename.replace(".", "_")
             outfile = basename + ".png"
         if self.render_mode == RenderMode.test_only:
@@ -274,23 +275,32 @@ class OpenScadRunner(object):
             self.script = f.readlines();
         if self.success and self.render_mode != RenderMode.test_only:
             if self.animate:
-                imgs = []
                 imgfiles = ["{}{:05d}.png".format(basename,i) for i in range(self.animate)]
-                for imgfile in imgfiles:
-                    img = Image.open(imgfile)
+                if fileext == ".gif":
+                    imgs = []
+                    for imgfile in imgfiles:
+                        img = Image.open(imgfile)
+                        if self.antialias != 1.0:
+                            img.thumbnail(self.imgsize, Image.ANTIALIAS)
+                        imgs.append(img)
+                    imgs[0].save(
+                        self.outfile,
+                        save_all=True,
+                        append_images=imgs[1:],
+                        duration=self.animate_duration,
+                        loop=0
+                    )
+                    pygifsicle.optimize(self.outfile, colors=64)
+                elif fileext == ".png":
                     if self.antialias != 1.0:
-                        img.thumbnail(self.imgsize, Image.ANTIALIAS)
-                    imgs.append(img)
+                        for imgfile in imgfiles:
+                            img = Image.open(imgfile)
+                            img.thumbnail(self.imgsize, Image.ANTIALIAS)
+                            os.unlink(imgfile)
+                            img.save(imgfile)
+                    APNG.from_files(imgfiles, delay=self.animate_duration).save(self.outfile)
                 for imgfile in imgfiles:
                     os.unlink(imgfile)
-                imgs[0].save(
-                    self.outfile,
-                    save_all=True,
-                    append_images=imgs[1:],
-                    duration=self.animate_duration,
-                    loop=0
-                )
-                pygifsicle.optimize(self.outfile, colors=64)
             elif float(self.antialias) != 1.0:
                 im = Image.open(self.outfile)
                 im.thumbnail(self.imgsize, Image.ANTIALIAS)

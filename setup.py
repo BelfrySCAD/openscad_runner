@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-VERSION = "1.0.12"
+VERSION = "1.1.0"
 
 
 with open('README.rst') as f:
@@ -42,7 +42,8 @@ setup(
     install_requires=[
         'setuptools',
         'Pillow>=7.2.0',
-        'pygifsicle>=1.0.2'
+        'pygifsicle>=1.0.2',
+        'apng>=0.3.4'
     ],
     data_files=data_files,
 )
