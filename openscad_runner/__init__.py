@@ -281,7 +281,7 @@ class OpenScadRunner(object):
                     for imgfile in imgfiles:
                         img = Image.open(imgfile)
                         if self.antialias != 1.0:
-                            img.thumbnail(self.imgsize, Image.ANTIALIAS)
+                            img.thumbnail(self.imgsize, Image.Resampling.LANCZOS)
                         imgs.append(img)
                     imgs[0].save(
                         self.outfile,
@@ -295,7 +295,7 @@ class OpenScadRunner(object):
                     if self.antialias != 1.0:
                         for imgfile in imgfiles:
                             img = Image.open(imgfile)
-                            img.thumbnail(self.imgsize, Image.ANTIALIAS)
+                            img.thumbnail(self.imgsize, Image.Resampling.LANCZOS)
                             os.unlink(imgfile)
                             img.save(imgfile)
                     APNG.from_files(imgfiles, delay=self.animate_duration).save(self.outfile)
@@ -303,7 +303,7 @@ class OpenScadRunner(object):
                     os.unlink(imgfile)
             elif float(self.antialias) != 1.0:
                 im = Image.open(self.outfile)
-                im.thumbnail(self.imgsize, Image.ANTIALIAS)
+                im.thumbnail(self.imgsize, Image.Resampling.LANCZOS)
                 os.unlink(self.outfile)
                 im.save(self.outfile)
         self.complete = True
