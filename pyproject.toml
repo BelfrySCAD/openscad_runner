@@ -1,0 +1,49 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openscad_runner"
+version = "1.1.1"
+authors = [
+  { name="Revar Desmera", email="revarbat@gmail.com" },
+]
+maintainers = [
+  { name="Revar Desmera", email="revarbat@gmail.com" },
+]
+description = "A Python library to interface with the OpenSCAD app."
+readme = "README.rst"
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Topic :: Multimedia :: Graphics :: 3D Rendering",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["openscad", "interface"]
+dependencies = [
+    "Pillow>=7.2.0",
+    "pygifsicle>=1.0.2",
+    "apng>=0.3.4"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/revarbat/openscad_runner"
+"Repository" = "https://github.com/revarbat/openscad_runner"
+"Bug Tracker" = "https://github.com/revarbat/openscad_runner/issues"
+"Releases" = "https://github.com/revarbat/openscad_runner/releases"
+"Usage" = "https://github.com/revarbat/openscad_runner/README.rst"
+"Documentation" = "https://github.com/revarbat/openscad_runner/README.rst"
