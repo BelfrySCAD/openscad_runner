@@ -41,9 +41,9 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/revarbat/openscad_runner"
-"Repository" = "https://github.com/revarbat/openscad_runner"
-"Bug Tracker" = "https://github.com/revarbat/openscad_runner/issues"
-"Releases" = "https://github.com/revarbat/openscad_runner/releases"
-"Usage" = "https://github.com/revarbat/openscad_runner/README.rst"
-"Documentation" = "https://github.com/revarbat/openscad_runner/README.rst"
+"Homepage" = "https://github.com/belfryscad/openscad_runner"
+"Repository" = "https://github.com/belfryscad/openscad_runner"
+"Bug Tracker" = "https://github.com/belfryscad/openscad_runner/issues"
+"Releases" = "https://github.com/belfryscad/openscad_runner/releases"
+"Usage" = "https://github.com/belfryscad/openscad_runner/README.rst"
+"Documentation" = "https://github.com/belfryscad/openscad_runner/README.rst"
