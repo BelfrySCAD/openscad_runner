@@ -1,11 +1,11 @@
 import os
 import sys
 import math
+import shutil
 import filecmp
 import os.path
 import platform
 import subprocess
-import distutils.spawn
 
 from enum import Enum
 from PIL import Image, ImageChops
@@ -112,24 +112,27 @@ class OpenScadRunner(object):
         - quiet = Suppresses non-error, non-warning messages.  Default: False
         - verbose = Print the command-line to stdout on each execution.  Default: False
         """
-        if platform.system() == "Darwin":
-            self.OPENSCAD = "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"
+        exepath = shutil.which("openscad")
+        if exepath is not None:
+            self.OPENSCAD = exepath
+        elif platform.system() == "Darwin":
+            exepath = shutil.which("/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD")
+            if exepath is not None:
+                self.OPENSCAD = exepath
         elif platform.system() == "Windows":
-            if distutils.spawn.find_executable("openscad"):
-                self.OPENSCAD = "openscad"
-            else:
-                test_paths = [
-                    "C:\\Program Files\\openSCAD\\openscad.com",
-                    "C:\\Program Files (x86)\\openSCAD\\openscad.com",
-                ]
-                for p in test_paths:
-                    if os.path.isfile(p):
-                        self.OPENSCAD = p
-                        break
-            if not hasattr(self, "OPENSCAD"):
-                raise Exception("Can't find OpenSCAD executable. Is OpenSCAD on your system PATH?")
-        else:
-            self.OPENSCAD = "openscad"
+            test_paths = [
+                "C:\\Program Files\\openSCAD\\openscad.com",
+                "C:\\Program Files\\openSCAD\\openscad.exe",
+                "C:\\Program Files (x86)\\openSCAD\\openscad.com",
+                "C:\\Program Files (x86)\\openSCAD\\openscad.exe",
+            ]
+            for p in test_paths:
+                exepath = shutil.which(p)
+                if exepath is not None:
+                    self.OPENSCAD = exepath
+                    break
+        if not hasattr(self, "OPENSCAD"):
+            raise Exception("Can't find OpenSCAD executable. Is OpenSCAD on your system PATH?")
         self.scriptfile = scriptfile
         self.outfile = outfile
         self.imgsize = imgsize
