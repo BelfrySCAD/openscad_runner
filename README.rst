@@ -56,6 +56,7 @@ The ``OpenScadRunner`` class provides the following methods:
     - customizer_params = An optional dictionary of customizer parameter names and values to set.
     - hard_warnings = Stop at first WARNING, as if it were an ERROR.  Default: False
     - quiet = Suppresses non-error, non-warning messages.  Default: False
+    - enabled = List of experimental features to enable.  Default; []
 - ``good()`` Returns True if the ``run()`` method was called, and processing completed successfully.
 - ``__bool__()`` Returns True if the ``run()`` method was called, and processing completed, whether or not it was successful.
 - ``run()`` Run the OpenSCAD app with the current settings.  This sets some instance variables:

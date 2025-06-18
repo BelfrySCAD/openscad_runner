@@ -82,7 +82,8 @@ class OpenScadRunner(object):
         customizer_params={},
         hard_warnings=False,
         quiet=False,
-        verbose=False
+        verbose=False,
+        enabled=[]
     ):
         """
         Initializer method.  Arguments are:
@@ -111,6 +112,7 @@ class OpenScadRunner(object):
         - hard_warnings = Stop at first WARNING, as if it were an ERROR.  Default: False
         - quiet = Suppresses non-error, non-warning messages.  Default: False
         - verbose = Print the command-line to stdout on each execution.  Default: False
+        - enabled = List of experimental features enabled.  Default: []
         """
         exepath = shutil.which("openscad")
         if exepath is not None:
@@ -158,6 +160,7 @@ class OpenScadRunner(object):
         self.hard_warnings = hard_warnings
         self.quiet = quiet
         self.verbose = verbose
+        self.enabled = enabled
 
         self.cmdline = []
         self.script = []
@@ -245,6 +248,8 @@ class OpenScadRunner(object):
             scadcmd.extend(["-p", self.customizer_file])
         for var, val in self.customizer_params.items():
             scadcmd.extend(["-P", "{}={}".format(var,val)])
+        for feature in self.enabled:
+            scadcmd.extend("--enable", "{}".format(feature))
         if self.hard_warnings:
             scadcmd.append("--hardwarnings")
         if self.quiet:
