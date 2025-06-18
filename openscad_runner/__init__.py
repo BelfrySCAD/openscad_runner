@@ -249,7 +249,7 @@ class OpenScadRunner(object):
         for var, val in self.customizer_params.items():
             scadcmd.extend(["-P", "{}={}".format(var,val)])
         for feature in self.enabled:
-            scadcmd.extend("--enable", "{}".format(feature))
+            scadcmd.extend(["--enable", "{}".format(feature)])
         if self.hard_warnings:
             scadcmd.append("--hardwarnings")
         if self.quiet:
