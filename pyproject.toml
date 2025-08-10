@@ -7,7 +7,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openscad_runner"
-version = "1.2.0"
+version = "1.2.1"
+license = "MIT"
 authors = [
   { name="Revar Desmera", email="revarbat@gmail.com" },
 ]
@@ -22,7 +23,6 @@ classifiers = [
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: Manufacturing",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
