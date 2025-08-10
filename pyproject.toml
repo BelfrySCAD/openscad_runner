@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openscad_runner"
-version = "1.1.2"
+version = "1.2.0"
 authors = [
   { name="Revar Desmera", email="revarbat@gmail.com" },
 ]
@@ -47,3 +47,4 @@ dependencies = [
 "Releases" = "https://github.com/belfryscad/openscad_runner/releases"
 "Usage" = "https://github.com/belfryscad/openscad_runner/README.rst"
 "Documentation" = "https://github.com/belfryscad/openscad_runner/README.rst"
+
