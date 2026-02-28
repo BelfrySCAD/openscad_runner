@@ -3,6 +3,9 @@ OpenSCAD Runner
 
 A Python library to interface with and run the OpenSCAD interpreter.
 
+- **GitHub:** https://github.com/BelfrySCAD/openscad_runner
+- **Organization:** https://github.com/BelfrySCAD
+
 ColorScheme Enum Class
 ----------------------
 ``ColorScheme`` defines the following enums:
