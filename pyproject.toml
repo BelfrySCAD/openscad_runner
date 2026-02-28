@@ -41,10 +41,10 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/belfryscad/openscad_runner"
-"Repository" = "https://github.com/belfryscad/openscad_runner"
-"Bug Tracker" = "https://github.com/belfryscad/openscad_runner/issues"
-"Releases" = "https://github.com/belfryscad/openscad_runner/releases"
-"Usage" = "https://github.com/belfryscad/openscad_runner/README.rst"
-"Documentation" = "https://github.com/belfryscad/openscad_runner/README.rst"
+"Homepage" = "https://github.com/BelfrySCAD/openscad_runner"
+"Repository" = "https://github.com/BelfrySCAD/openscad_runner"
+"Bug Tracker" = "https://github.com/BelfrySCAD/openscad_runner/issues"
+"Releases" = "https://github.com/BelfrySCAD/openscad_runner/releases"
+"Usage" = "https://github.com/BelfrySCAD/openscad_runner/README.rst"
+"Documentation" = "https://github.com/BelfrySCAD/openscad_runner/README.rst"
 
