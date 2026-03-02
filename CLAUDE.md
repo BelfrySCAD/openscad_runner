@@ -8,11 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Setup
 
-Install in editable mode with dependencies:
+Install dependencies (uses uv):
 ```bash
-pip install -e ".[dev]"
-# or simply
-pip install -e .
+uv sync
 ```
 
 Dependencies: `Pillow`, `pygifsicle`, `apng`
@@ -22,8 +20,8 @@ The library requires OpenSCAD to be installed on the system. It searches `PATH`,
 ## Building and Publishing
 
 ```bash
-python -m build          # Creates dist/ with .whl and .tar.gz
-twine upload dist/*      # Publish to PyPI
+uv build                 # Creates dist/ with .whl and .tar.gz
+uv publish               # Publish to PyPI (or use twine upload dist/*)
 ```
 
 ## Architecture
