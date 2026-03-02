@@ -45,3 +45,8 @@ dependencies = [
 "Usage" = "https://github.com/BelfrySCAD/openscad_runner/README.rst"
 "Documentation" = "https://github.com/BelfrySCAD/openscad_runner/README.rst"
 
+[dependency-groups]
+dev = ["pytest>=7"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

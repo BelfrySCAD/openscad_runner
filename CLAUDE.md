@@ -52,3 +52,12 @@ Outputs to a temporary `foo.term` file (deleted after run) to validate the scrip
 - `set_vars` injects `-D key=value` args; `customizer_params` injects `-P key=value` args
 - Blank entries in `enabled` are skipped (guarded by `if feature:`)
 - On Windows, empty string args are stripped from the command list before passing to OpenSCAD
+
+## Testing
+
+Run the full test suite (unit + integration):
+```bash
+uv run pytest
+```
+
+Unit tests run without OpenSCAD. Integration tests are skipped automatically if OpenSCAD is not installed.
