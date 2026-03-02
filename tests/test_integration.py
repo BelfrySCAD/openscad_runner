@@ -52,10 +52,10 @@ def test_set_vars_injection(tmp_path, out_png):
 
 @skip_if_no_openscad
 def test_hard_warnings_with_warning_scad(tmp_path, out_png):
-    # assign() is deprecated in OpenSCAD and generates a WARNING
+    # Passing undef as a dimension triggers a WARNING in OpenSCAD 2022+
     scad = str(tmp_path / "warn.scad")
     with open(scad, "w") as f:
-        f.write("assign(x=1) { cube([x,x,x]); }")
+        f.write("cube([undef, 1, 1]);")
     runner = OpenScadRunner(scad, out_png, hard_warnings=True)
     runner.run()
     assert runner.success is False

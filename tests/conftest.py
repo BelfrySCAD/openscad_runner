@@ -24,7 +24,10 @@ def out_stl(tmp_path):
     return str(tmp_path / "out.stl")
 
 
-openscad_available = shutil.which("openscad") is not None
+openscad_available = (
+    shutil.which("openscad") is not None
+    or shutil.which("/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD") is not None
+)
 skip_if_no_openscad = pytest.mark.skipif(
     not openscad_available,
     reason="OpenSCAD not installed",
