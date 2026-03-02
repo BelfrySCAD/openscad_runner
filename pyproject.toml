@@ -14,7 +14,7 @@ maintainers = [
 ]
 description = "A Python library to interface with the OpenSCAD app."
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -32,9 +32,9 @@ classifiers = [
 ]
 keywords = ["openscad", "interface"]
 dependencies = [
-    "Pillow>=7.2.0",
+    "pillow>=12.1.1",
     "pygifsicle>=1.0.2",
-    "apng>=0.3.4"
+    "apng>=0.3.4",
 ]
 
 [project.urls]
