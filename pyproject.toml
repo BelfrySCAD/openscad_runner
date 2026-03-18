@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "openscad_runner"
-version = "1.2.3"
+version = "1.2.4"
 license = "MIT"
 authors = [
   { name="Revar Desmera", email="revarbat@gmail.com" },
@@ -46,7 +46,10 @@ dependencies = [
 "Documentation" = "https://github.com/BelfrySCAD/openscad_runner/README.rst"
 
 [dependency-groups]
-dev = ["pytest>=7"]
+dev = [
+    "pytest>=7",
+    "pytest-cov>=7.0.0",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
