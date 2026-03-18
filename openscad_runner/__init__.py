@@ -6,6 +6,7 @@ import filecmp
 import os.path
 import platform
 import subprocess
+import tempfile
 
 from enum import Enum
 from PIL import Image, ImageChops
@@ -197,7 +198,9 @@ class OpenScadRunner(object):
             basename = basename.replace(".", "_")
             outfile = basename + ".png"
         if self.render_mode == RenderMode.test_only:
-            scadcmd = [self.OPENSCAD, "-o", "foo.term"]
+            self._term_tmpfile = tempfile.NamedTemporaryFile(suffix=".term", delete=False)
+            self._term_tmpfile.close()
+            scadcmd = [self.OPENSCAD, "-o", self._term_tmpfile.name]
         else:
             scadcmd = [self.OPENSCAD, "-o", outfile]
             if fileext in [".png", ".gif"]:
@@ -278,8 +281,8 @@ class OpenScadRunner(object):
         self.errors   = [x for x in self.stderr if x.startswith("ERROR:") or x.startswith("TRACE:")]
         if self.return_code==0 and self.errors==[] and (not self.hard_warnings or self.warnings==[]):
             self.success = True
-        if self.render_mode==RenderMode.test_only and os.path.isfile("foo.term"):
-            os.unlink("foo.term")
+        if self.render_mode == RenderMode.test_only and os.path.isfile(self._term_tmpfile.name):
+            os.unlink(self._term_tmpfile.name)
         with open(self.scriptfile, "r") as f:
             self.script = f.readlines();
         if self.success and self.render_mode != RenderMode.test_only:

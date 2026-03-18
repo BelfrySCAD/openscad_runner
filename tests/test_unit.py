@@ -263,7 +263,7 @@ class TestCmdlineBuilding:
 
     def test_render_mode_test_only(self, scad_file, out_png):
         with make_runner(scad_file, out_png, render_mode=RenderMode.test_only) as runner:
-            assert "foo.term" in runner.cmdline
+            assert any(arg.endswith(".term") for arg in runner.cmdline)
 
     def test_color_scheme_metallic(self, scad_file, out_png):
         with make_runner(scad_file, out_png, color_scheme=ColorScheme.metallic) as runner:

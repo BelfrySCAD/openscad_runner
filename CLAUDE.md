@@ -44,7 +44,7 @@ When `animate=N` is set, OpenSCAD generates `N` numbered PNG frames. The runner 
 When `antialias > 1.0`, OpenSCAD renders at `imgsize * antialias` resolution, then Pillow downscales to `imgsize` using `LANCZOS` resampling.
 
 ### `test_only` mode
-Outputs to a temporary `foo.term` file (deleted after run) to validate the script without producing real output.
+Outputs to a uniquely-named temporary `.term` file (created via `tempfile.NamedTemporaryFile`, deleted after run) to validate the script without producing real output. Using a randomized temp path avoids collisions when multiple instances run concurrently via multiprocessing.
 
 ## Key Behaviors to Know
 
